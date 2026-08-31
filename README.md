@@ -37,10 +37,8 @@ This tutorial outlines the implementation of on-premises Active Directory within
 <br />
 <h3 align="center">Setup Resources in Azure</h3>
 <br />
-<h3>Step 1</h3>
-<p>
-  Create the Resource Group named “RG-AD-project”
-</p>
+<h3>Step 1: Create the Resource Group named “RG-AD-project”</h3>
+
 <p>
   <img src="https://i.imgur.com/2kLXoHp.png" height="50%" width="50%" alt="resource group"/>
 </p>
@@ -269,43 +267,94 @@ This tutorial outlines the implementation of on-premises Active Directory within
 <br />
 <h3 align="center">Create an Admin and Normal User Account in AD</h3>
 <br />
+    <h3>Step 1: Create an Organizational Unit (OU) in Active Directory</h3>
 <p>
-  In Active Directory Users and Computers (ADUC), create an Organizational Unit (OU) called “_EMPLOYEES” and another one called "_ADMINS":
+  From DC-1 virtual machine, go to Active Directory Users and Computers (ADUC)<br>
+  Right-click on our domain server name mydomain.com -> click New -> click User<br>
+  Create an Organizational Unit (OU) called “_EMPLOYEES” and another one called "_ADMINS":<br>
 </p>
 <p>
-  <img src="https://i.imgur.com/cYmv0r7.png" height="75%" width="100%" alt="organizational unit"/>
-  <img src="https://i.imgur.com/v02CBPI.png" height="75%" width="100%" alt="organizational unit"/>
+  <img src="https://i.imgur.com/s6wqKtw.png" height="75%" width="50%" alt="ADUC windows"/>
 </p>
 <p>
+  <img src="https://i.imgur.com/95JD8Y2.png" height="75%" width="50%" alt="Create OUs"/>
+</p>
+<p>
+  <img src="https://i.imgur.com/NZS3CLa.png" height="75%" width="50%" alt="Create OUs"/>
+</p>
+    <h3>Step 2: Create a new admin employee named “Jane Doe”</h3>
+<p>
+  Right-click on the newly created _ADMINS Organizational Unit folder -> click New -> click User<br>
   Create a new employee named “Jane Doe” with the username of “jane_admin”:
 </p>
 <p>
-  <img src="https://i.imgur.com/h546E6L.png" height="75%" width="100%" alt="admin creation"/>
+  <img src="https://i.imgur.com/UbC4FTt.png" height="50%" width="50%" alt="admin employees creation"/>
 </p>
 <p>
-  Add jane_admin to the “Domain Admins” Security Group:
+  <img src="https://i.imgur.com/qbq8a3x.png" height="50%" width="50%" alt="admin employeescreation"/>
+</p>
+    <p>
+  <img src="https://i.imgur.com/ICCyrYq.png" height="50%" width="50%" alt="admin employees creation"/>
+</p>
+</p>
+    <h3>Step 3: Add jane_admin to the “Domain Admins” Security Group:</h3>
+<p>
+  Right-click on the newly created _ADMINS employee Jane_Doe -> then click Properties<br>
+  In the Properties pop-up window, Click on the Member Of tab -> then click ADD<br>
+  Type "domain admins" in the "object names to select" box -> then click Check For Names -> then Apply followed by OK -> Finallly, click ADD<br>
+
+<p>
+  <img src="https://i.imgur.com/HdpzRmj.png" height="50%" width="50%" alt="security group"/>
 </p>
 <p>
-  <img src="https://i.imgur.com/mnLwTgq.png" height="75%" width="100%" alt="security group"/>
+  <img src="https://i.imgur.com/ObyJP5K.png" height="50%" width="50%" alt="security group"/>
 </p>
+<p>
+  <img src="https://i.imgur.com/kLuaiTl.png" height="50%" width="50%" alt="security group"/>
+</p>
+<p>
+  <img src="https://i.imgur.com/4gTajBL.png" height="50%" width="50%" alt="security group"/>
+</p>
+</p>
+    <h3>Step 4: log back into DC-1 domain server as employee jane_admin</h3>
+<p>
 <p>  
-  Log out/close the Remote Desktop connection to DC-1 and log back in as “myadproject.com\jane_admin”. Use jane_admin as your admin account from now on:
+  Log out/close the Remote Desktop connection to DC-1 and log back in as “mydomain.com\jane_admin”. Use jane_admin as your admin account from now on:
 </p>
 <p>
-  <img src="https://i.imgur.com/xWZ4Kol.png" height="75%" width="100%" alt="admin login"/>
+  <img src="https://i.imgur.com/7DeYGsE.png" height="75%" width="100%" alt="admin login"/>
 </p>
 <br />
 <br />
-<h3 align="center">Join Client-1 to your domain (myadproject.com)</h3>
+<h3 align="center">Join Client-1 to your domain (mydomain.com)</h3>
 <br />
+</p>
+    <h3>Step 1: Set Client-1’s DNS settings to the DC’s Private IP address</h3>
 <p>
-  From the Azure Portal, set Client-1’s DNS settings to the DC’s Private IP address:
+  From the Azure Portal, click on the Client-1 VM -> click on Network Settings in the Networking drop-down menu.
+  Next, Click on IP configuration -> in the next page, click on DNS Servers in the Settings drop-down menu
+  Finally, enter DC's private IP in the Custom DNS Servers -> Apply and save the changes.
 </p>
 <p>
-  <img src="https://i.imgur.com/1KRsjI6.png" height="75%" width="100%" alt="client dns settings"/>
+  <img src="https://i.imgur.com/hEv1gwP.png" height="55%" width="55%" alt="client dns settings"/>
+</p>
+<p>
+  <img src="https://i.imgur.com/LPC0OUJ.png" height="55%" width="55%" alt="client dns settings"/>
 </p>
 <p>
   From the Azure Portal, restart Client-1.
+</p>
+<p>
+  <img src="https://i.imgur.com/KDADrG1.png" height="55%" width="55%" alt="client dns settings"/>
+</p>
+</p>
+    <h3>Step 2: Join Client-1 to your domain (mydomain.com)</h3>
+<p>
+<p>
+  Login to Client-1 (Remote Desktop) as the original local admin (labuser) and join it to the domain (computer will restart):
+</p>
+<p>
+  <img src="https://i.imgur.com/50wszcP.png" height="75%" width="100%" alt="domain joining"/>
 </p>
 <p>
   Login to Client-1 (Remote Desktop) as the original local admin (labuser) and join it to the domain (computer will restart):
