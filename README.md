@@ -351,25 +351,54 @@ This tutorial outlines the implementation of on-premises Active Directory within
     <h3>Step 2: Join Client-1 to your domain (mydomain.com)</h3>
 <p>
 <p>
-  Login to Client-1 (Remote Desktop) as the original local admin (labuser) and join it to the domain (computer will restart):
+  Login to Client-1 (Remote Desktop) as the original local admin (labuser)<br>
+  Right-click the Windows logo -> Click System to open the System Properties window -> Click on Advancedd System Settings <br>
 </p>
 <p>
-  <img src="https://i.imgur.com/50wszcP.png" height="75%" width="100%" alt="domain joining"/>
+  <img src="https://i.imgur.com/TzuI3LW.png" height="55%" width="55%" alt="domain joining"/>
 </p>
 <p>
-  Login to Client-1 (Remote Desktop) as the original local admin (labuser) and join it to the domain (computer will restart):
+  <img src="https://i.imgur.com/og29MEO.png" height="55%" width="55%" alt="domain joining"/>
 </p>
 <p>
-  <img src="https://i.imgur.com/50wszcP.png" height="75%" width="100%" alt="domain joining"/>
+  In the System Settings pop-up window, click the Computer Name tab -> click Change<br>
+  Under "Member of", select Domain and enter the name of our domain server (mydomain.com)
 </p>
 <p>
-  Login to the Domain Controller (Remote Desktop) and verify Client-1 shows up in Active Directory Users and Computers (ADUC) inside the “Computers” container on the root of the domain.
+  <img src="https://i.imgur.com/q305Uu2.png" height="55%" width="55%" alt="domain joining"/>
+</p>
+<p>
+  <img src="https://i.imgur.com/mfYa615.png" height="55%" width="55%" alt="domain joining"/>
+</p>
+<p>
+  Use jane_admin credentials to join the domain and click Ok<br>
+  The computer (Client-1) will restart to confirm and apply the changes.
+</p>
+<p>
+  <img src="https://i.imgur.com/PjGoMj2.png" height="55%" width="55%" alt="domain joining"/>
+</p>
+<p>
+  <img src="https://i.imgur.com/O6mHce2.png" height="55%" width="55%" alt="domain joining"/>
+</p>
+</p>
+    <h3>Step 3: Verify Client-1 shows up in Active Directory of DC-1</h3>
+<p>
+<p>
+  Login to the Domain Controller  DC-1<br>
+  Open the Active Directory Users and Computers (ADUC) window -> click on the mydomain.com drop-down<br>
+  Click “Computers” and observe that Client-1 VM is now present as a part of the same domain. 
+</p>
+<p>
+  <img src="https://i.imgur.com/8eBMmaD.png" height="55%" width="55%" alt="Client-1 in AD"/>
 </p>
 <p>
   Create a new OU named “_CLIENTS” and drag Client-1 into there:
 </p>
 <p>
-  <img src="https://i.imgur.com/vB1n9m0.png" height="75%" width="100%" alt="active directory client verification"/>
+  <img src="https://i.imgur.com/GL5julu.png" height="55%" width="55%" alt="Client-1 in AD"/>
+</p>
+<p>
+  <img src="https://i.imgur.com/49tLOjw.png" height="55%" width="55%" alt="Client-1 in AD"/>
 </p>
 <br />
 <br />
@@ -388,10 +417,10 @@ This tutorial outlines the implementation of on-premises Active Directory within
   You can now log into Client-1 as a normal, non-administrative user now.
 </p>
 <p>
-  Normally you’d want to do this with Group Policy that allows you to change MANY systems at once:
+  Normally, you’d want to do this with Group Policy that allows you to change MANY systems at once:
 </p>
 <p>
-  <img src="https://i.imgur.com/8BfpT3s.png" height="75%" width="100%" alt="remote desktop setup"/>
+  <img src="https://i.imgur.com/iDLcUFL.png" height="55%" width="55%" alt="remote desktop setup"/>
 </p>
 <br />
 <br />
@@ -401,27 +430,27 @@ This tutorial outlines the implementation of on-premises Active Directory within
   Login to DC-1 as jane_admin
 </p>
 <p>
-  Open PowerShell_ise as an administrator.
+  Open PowerShell_ISE as an administrator.
 </p> 
 <p>  
   Create a new File and paste the contents of this script (https://github.com/louisangesakala/AD_PS/blob/main/Generate-Names-Create-Users.ps1) into it:
 </p>
 <p>
-  <img src="https://i.imgur.com/0i8uApf.png" height="75%" width="100%" alt="create users script"/>
+  <img src="https://i.imgur.com/kUQdm04.jpeg" height="55%" width="55%" alt="create users script"/>
 </p>
 <p>
   Run the script and observe the accounts being created:
 </p>
 <p>
-  <img src="https://i.imgur.com/6QOGzs6.png" height="75%" width="100%" alt="observe create users script"/>
+  <img src="https://i.imgur.com/RsXzPWB.png" height="55%" width="55%" alt="observe create users script"/>
 </p>
 <p>
   When finished, open ADUC and observe the accounts in the appropriate OU and attempt to log into Client-1 with one of the accounts (take note of the password in the script):
 </p>
 <p>
-  <img src="https://i.imgur.com/ZZCfiCp.png" height="75%" width="100%" alt="employee user accounts"/>
-  <img src="https://i.imgur.com/7gBpNzN.png" height="75%" width="100%" alt="employee user selection"/>
-  <img src="https://i.imgur.com/cqsddjn.png" height="75%" width="100%" alt="employee user login"/>
+  <img src="https://i.imgur.com/Rgdm440.png" height="55%" width="55%" alt="employee user accounts"/>
+  <img src="https://i.imgur.com/tNziwqo.png" height="55%" width="55%" alt="employee user selection"/>
+  <img src="https://i.imgur.com/4Fd85O7.jpeg" height="55%" width="55%" alt="employee user login"/>
 </p>
 <br />
 <br />
