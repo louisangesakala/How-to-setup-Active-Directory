@@ -388,7 +388,7 @@ This tutorial outlines the implementation of on-premises Active Directory within
   You can now log into Client-1 as a normal, non-administrative user now.
 </p>
 <p>
-  Normally you’d want to do this with Group Policy that allows you to change MANY systems at once (maybe a future lab):
+  Normally you’d want to do this with Group Policy that allows you to change MANY systems at once:
 </p>
 <p>
   <img src="https://i.imgur.com/8BfpT3s.png" height="75%" width="100%" alt="remote desktop setup"/>
@@ -404,7 +404,7 @@ This tutorial outlines the implementation of on-premises Active Directory within
   Open PowerShell_ise as an administrator.
 </p> 
 <p>  
-  Create a new File and paste the contents of this script (https://github.com/Xinloiazn/configure-ad/blob/main/adscript.ps1) into it:
+  Create a new File and paste the contents of this script (https://github.com/louisangesakala/AD_PS/blob/main/Generate-Names-Create-Users.ps1) into it:
 </p>
 <p>
   <img src="https://i.imgur.com/0i8uApf.png" height="75%" width="100%" alt="create users script"/>
